@@ -1,4 +1,6 @@
-## Windows File and Folder Permissions with PowerShell
+## Windows File and Folder Permissions
+
+---
 
 ### Overview
 
@@ -70,10 +72,11 @@ This displays the access control entries associated with the file or directory.
 Permissions can then be modified using ICACLS commands.
 
 ---
+---
 
-## Example 1 — Give a User Read-Only Access
+### Example 1 — Give a User Read-Only Access
 
-### Scenario
+#### Scenario
 
 The file:
 
@@ -87,7 +90,7 @@ The goal is to change Kara's permissions so that she has **read-only access**.
 
 ---
 
-### Step 1 — View Existing Permissions
+#### Step 1 — View Existing Permissions
 
 Use `ICACLS` to view the current permissions:
 
@@ -106,7 +109,7 @@ Write
 
 ---
 
-### Step 2 — Remove Kara's Existing Permissions
+#### Step 2 — Remove Kara's Existing Permissions
 
 Remove Kara's current permissions so they can be configured again.
 
@@ -119,7 +122,7 @@ icacls "C:\Users\Qwiklab\Documents\important_document" /remove "Kara"
 
 ---
 
-### Step 3 — Grant Read Permission
+#### Step 3 — Grant Read Permission
 
 Grant Kara read access:
 
@@ -131,7 +134,7 @@ icacls "C:\Users\Qwiklab\Documents\important_document" /grant "Kara:(r)"
 
 ---
 
-### Step 4 — Verify
+#### Step 4 — Verify
 
 Run:
 
@@ -151,9 +154,9 @@ and should no longer have write access.
 
 ---
 
-## Example 2 — Give a Second User Access
+### Example 2 — Give a Second User Access
 
-### Scenario
+#### Scenario
 
 There is a folder called:
 
@@ -173,7 +176,7 @@ The goal is to:
 
 ---
 
-### Step 1 — View Current Permissions
+#### Step 1 — View Current Permissions
 
 ```powershell
 icacls "C:\Users\Qwiklab\Secret"
@@ -181,7 +184,7 @@ icacls "C:\Users\Qwiklab\Secret"
 
 ---
 
-### Step 2 — Grant Phoebe Read Access
+#### Step 2 — Grant Phoebe Read Access
 
 ```powershell
 icacls "C:\Users\Qwiklab\Secret" /grant "Phoebe:(r)"
@@ -191,7 +194,7 @@ icacls "C:\Users\Qwiklab\Secret" /grant "Phoebe:(r)"
 
 ---
 
-### Step 3 — Give Kara Write Access
+#### Step 3 — Give Kara Write Access
 
 Kara already has read access, so write access can be added:
 
@@ -201,7 +204,7 @@ icacls "C:\Users\Qwiklab\Secret" /grant "Kara:(w)"
 
 ---
 
-### Step 4 — Verify
+#### Step 4 — Verify
 
 ```powershell
 icacls "C:\Users\Qwiklab\Secret"
@@ -216,12 +219,11 @@ Phoebe → Read
 
 ![step3-4](https://i.imgur.com/PVuA6ny.png)
 
-
 ---
 
-## Example 3 — Modify Permissions for a Group
+### Example 3 — Modify Permissions for a Group
 
-### Scenario
+#### Scenario
 
 The folder:
 
@@ -235,7 +237,7 @@ The goal is to change the Everyone group's permissions to **Read only**.
 
 ---
 
-### Step 1 — View Existing Permissions
+#### Step 1 — View Existing Permissions
 
 ```powershell
 icacls "C:\Users\Qwiklab\Music"
@@ -245,7 +247,7 @@ icacls "C:\Users\Qwiklab\Music"
 
 ---
 
-### Step 2 — Remove Existing Everyone Permissions
+#### Step 2 — Remove Existing Everyone Permissions
 
 ```powershell
 icacls "C:\Users\Qwiklab\Music" /remove "Everyone"
@@ -255,7 +257,7 @@ icacls "C:\Users\Qwiklab\Music" /remove "Everyone"
 
 ---
 
-### Step 3 — Grant Read Permission
+#### Step 3 — Grant Read Permission
 
 ```powershell
 icacls "C:\Users\Qwiklab\Music" /grant "Everyone:(r)"
@@ -263,7 +265,7 @@ icacls "C:\Users\Qwiklab\Music" /grant "Everyone:(r)"
 
 ---
 
-### Step 4 — Verify
+#### Step 4 — Verify
 
 ```powershell
 icacls "C:\Users\Qwiklab\Music"
@@ -282,9 +284,9 @@ and no Write permission.
 
 ---
 
-## Example 4 — Give Authenticated Users Write Access
+### Example 4 — Give Authenticated Users Write Access
 
-### Scenario
+#### Scenario
 
 The file:
 
@@ -296,7 +298,7 @@ needs to give the **Authenticated Users** group Write access.
 
 ---
 
-### Step 1 — View Current Permissions
+#### Step 1 — View Current Permissions
 
 ```powershell
 icacls "C:\Users\Qwiklab\Documents\not_so_important_document"
@@ -308,7 +310,7 @@ The `Authenticated Users` group is not currently listed.
 
 ---
 
-### Step 2 — Grant Write Permission
+#### Step 2 — Grant Write Permission
 
 ```powershell
 icacls "C:\Users\Qwiklab\Documents\not_so_important_document" /grant "Authenticated Users:(w)"
@@ -316,7 +318,7 @@ icacls "C:\Users\Qwiklab\Documents\not_so_important_document" /grant "Authentica
 
 ---
 
-### Step 3 — Verify
+#### Step 3 — Verify
 
 ```powershell
 icacls "C:\Users\Qwiklab\Documents\not_so_important_document"
@@ -333,9 +335,9 @@ Write
 
 ---
 
-## Example 5 — Make a File Readable by Everyone
+### Example 5 — Make a File Readable by Everyone
 
-### Scenario
+#### Scenario
 
 The file:
 
@@ -349,7 +351,7 @@ Instead of manually adding every user, the **Everyone** group can be given Read 
 
 ---
 
-### Step 1 — View Current Permissions
+#### Step 1 — View Current Permissions
 
 ```powershell
 icacls "C:\Users\Qwiklab\Documents\public_document"
@@ -357,7 +359,7 @@ icacls "C:\Users\Qwiklab\Documents\public_document"
 
 ---
 
-### Step 2 — Grant Everyone Read Access
+#### Step 2 — Grant Everyone Read Access
 
 ```powershell
 icacls "C:\Users\Qwiklab\Documents\public_document" /grant "Everyone:(r)"
@@ -365,7 +367,7 @@ icacls "C:\Users\Qwiklab\Documents\public_document" /grant "Everyone:(r)"
 
 ---
 
-### Step 3 — Verify
+#### Step 3 — Verify
 
 ```powershell
 icacls "C:\Users\Qwiklab\Documents\public_document"
@@ -379,6 +381,7 @@ Read
 
 ![step1-2-3](https://i.imgur.com/letHWe5.png)
 
+---
 ---
 
 ### Permission Management Workflow
@@ -404,8 +407,9 @@ Test access
 This approach helps avoid accidentally granting excessive access.
 
 ---
+---
 
-## PowerShell / ICACLS Commands Used
+### PowerShell / ICACLS Commands Used
 
 | Command                            | Purpose                     |
 | ---------------------------------  | --------------------------- |
@@ -416,10 +420,11 @@ This approach helps avoid accidentally granting excessive access.
 | icacls <path> /grant "Everyone:(r)"| Grant Everyone Read access  |
 
 ---
+---
 
-## Skills Demonstrated
+### Skills Demonstrated
 
-### Windows Administration
+#### Windows Administration
 
 * Using PowerShell
 * Working with administrative privileges
@@ -428,7 +433,7 @@ This approach helps avoid accidentally granting excessive access.
 * Working with Windows users
 * Working with Windows groups
 
-### Access Control
+#### Access Control
 
 * Viewing ACLs
 * Granting permissions
@@ -437,7 +442,7 @@ This approach helps avoid accidentally granting excessive access.
 * Modifying group permissions
 * Verifying access permissions
 
-### Troubleshooting
+#### Troubleshooting
 
 * Identifying incorrect permissions
 * Determining required access
@@ -445,8 +450,9 @@ This approach helps avoid accidentally granting excessive access.
 * Verifying configuration changes
 
 ---
+---
 
-# IT Support Relevance
+### IT Support Relevance
 
 File and folder permissions are common sources of Windows access problems.
 
@@ -467,8 +473,9 @@ An IT Support Specialist could investigate:
 PowerShell and `ICACLS` can help an IT Support Specialist investigate and modify these permissions.
 
 ---
+---
 
-## Cybersecurity Relevance
+### Cybersecurity Relevance
 
 Permissions are an important part of cybersecurity because they help control access to information and resources.
 
@@ -485,16 +492,17 @@ Understanding permissions helps security professionals with:
 * Windows security administration
 
 ---
+---
 
-# Troubleshooting Scenario
+### Troubleshooting Scenario
 
-### Scenario
+#### Scenario
 
 A user named Kara tells the IT Support team:
 
 > "I can open the document, but I can't make changes to it."
 
-### Troubleshooting Approach
+#### Troubleshooting Approach
 
 First, identify the file and check its permissions:
 
@@ -527,8 +535,9 @@ icacls "C:\Path\To\File"
 The important step is to **verify the required access before making changes** and then confirm that the change was successful.
 
 ---
+---
 
-## Lab Results
+### Lab Results
 
 During this lab, I practiced modifying permissions for both individual users and groups.
 
@@ -544,8 +553,9 @@ During this lab, I practiced modifying permissions for both individual users and
 | `public_document`           | Everyone            | Read         |
 
 ---
+---
 
-## What I Learned
+### What I Learned
 
 Through this lab, I learned how to:
 
